@@ -17,6 +17,11 @@
 !/hooks/**
 !/output-styles/**
 !/skills/**
+!/library/**
+
+# macOS
+.DS_Store
+
 chrome
 cache
 debug

@@ -1,0 +1,44 @@
+---
+description: Create a pull request for current branch
+model: claude-sonnet-4-5
+disable-model-invocation: true
+---
+
+## Steps
+1. Look at the commits on this branch
+2. Analyse the overall effect of these changes if merged into `main`
+3. Use `<template>` to write the pull request content
+4. Check for my approval, then:
+    - If approved, create the PR to `main`
+    - If not, incorporate changes and repeat step 3
+
+<rules>
+  <title-rules>
+    1. Brief & descriptive
+    2. Use title case
+    3. Be understandable to non-devs
+  </title-rules>
+  <tldr-rules>
+    1. List any steps devs must take after pulling this down
+  </tldr-rules>
+  <changes-rules>
+    Break changes into files or categories depending on PR scope. Use collapsible details.
+  </changes-rules>
+  <summary-rules>
+    Describe the PR with a non-technical, absurd metaphor.
+  </summary-rules>
+</rules>
+
+## Template
+```md
+# {{ title }}
+## Overview
+{{ overview }}
+> [!TIP]
+> {{ tldr }}
+## Changes
+{{ changes with collapsible details }}
+---
+## Summary
+{{ absurd metaphor }}
+```

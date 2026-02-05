@@ -1,0 +1,40 @@
+# Ignore everything by default
+!/.gitignore
+
+# === INCLUDE ===
+# Docs
+!/README.md
+!/CLAUDE.md
+!/keybindings.json
+
+# This just loads the sequential thinking mcp, which is **sick**
+!/.claude/settings.local.json
+
+# My customisations
+!/agents/**
+!/commands/**
+!/doc-templates/**
+!/hooks/**
+!/output-styles/**
+!/skills/**
+chrome
+cache
+debug
+docs
+file-history
+hooks/post-commit
+hooks/pre-push
+hooks/pre-push-evidence
+hooks/pre-push-tests
+paste-cache
+plans
+plugins
+projects
+scratch
+shell-snapshots
+statsig
+tasks
+todos
+history.jsonl
+settings.json
+stats-cache.json

@@ -1,216 +1,186 @@
-# Jason Warren - Global Configuration
+# Jason Warren - Claude Code Config
 
-> Last updated: 2026-01-06
-
-Claude reads this first. The more specific you are here, the less you repeat yourself in every chat.
+> Last updated: 2025-02-05
 
 ---
 
-## Developer Profile
+## Technical Profile
 
-**Role**: Level 4 Software Developer Apprentice @ Founders and Coders  
-**Current Focus**: AM2 Portfolio assessment, preparing Iris (ILR File Creator replacement)
-
-### Technical Expertise
-
-**Languages**
-- **TypeScript**: Primary language, expert-level
-- **JavaScript**: ES2022+, deep familiarity
-- **Python**: Minimal experience, learning as needed - not a go-to
-- **Rust**: None (Tauri uses it, but I'm not writing Rust myself)
-
-**Frontend**
-- **Preferred**: Svelte, SvelteKit (elegant, straightforward)
-- **When Required**: React, Next.js (used when necessary, not by choice)
-
-**Backend**
-- Node.js, Express
-- API design and integration patterns
-
-**Databases**
-- **Relational**: PostgreSQL, Supabase (with Row-Level Security expertise)
-- **Graph**: Neo4j (polyglot persistence architectures)
-- **Document**: MongoDB
-- **Client-side**: RxDB (experimented with for offline-first patterns - interesting but not a go-to)
-
-**Testing**
-- Familiar with Vitest and Jest
-- Testing approaches still evolving - this is a weakness
-- Write tests when valuable, but no systematic methodology yet
-
-**Tooling**
-- Git (comprehensive commit history culture)
-- Zed IDE (Catppuccin theme, Fira Code)
-- CLI workflows, Desktop Commander MCP
-- Vite for build tooling
-
-**Architectural Patterns**
-- Security-first implementation (RLS, authentication layers, data validation)
-- Polyglot persistence (choosing databases for their strengths)
-- Cross-language documentation and code bridging
-- Semantic validation over brittle positional mapping
+**Languages:** TypeScript (primary), JavaScript ES2022+, Python (learning)
+**Frontend:** Svelte/SvelteKit preferred, React/Next.js when required
+**Backend:** Node.js, Express, API design
+**Databases:** PostgreSQL, Supabase (RLS expertise), Neo4j, MongoDB
+**Testing:** Vitest preferred, Jest familiar — coverage is a known weakness
+**Tooling:** Git, Zed, Vite, bun/npm/pnpm (project-specific)
 
 ---
 
-## Communication Preferences
+## Communication
 
-### What Works
-- **Direct and structured**: Clear problem decomposition, explicit assumptions
-- **Neurodivergent-friendly**: Avoid ambiguity, use concrete examples, explicit over implicit
-- **British English**: Spelling, idioms, cultural context
-- **Authentic voice**: Technical precision wrapped in personality, not corporate drivel
-- **Clever humour**: Contextual, intellectually playful, never forced
+- **No sycophancy.** No "Great question!" No hedging. Direct answers only.
+- **British English** — see spelling rules below
+- Clever humour welcome when it lands; forced humour isn't
+- Concrete examples over abstract explanations
+- Explicit over implicit (neurodivergent-friendly)
+- Don't pretend weaknesses are strengths
 
-### What Doesn't Work
-- Sycophantic responses (they reduce trust - I'll use a competitor's model)
-- Excessive apologies or hedging
-- American colloquialisms or cultural assumptions
-- Over-formatted responses (excessive bullets/bold when prose would do)
-- Long explanations when a direct answer suffices
-- Pretending weaknesses are strengths
+### Spelling (Non-Negotiable)
+
+Use British spelling in all code comments, documentation, and output:
+
+- `-ise` not `-ize` (organisation, normalise, initialise)
+- `-our` not `-or` (colour, behaviour, favour)
+- `-re` not `-er` (centre, metre)
+- `-ogue` not `-og` (catalogue, dialogue)
+- Double consonants: travelled, cancelled, modelling
+
+If unsure: https://www.oxfordlearnersdictionaries.com
 
 ---
 
-## Code Style & Conventions
+## Claude Code Behaviour
 
-### Paradigm Preferences
-- Pragmatic over ideological - use OOP when it fits, functional when it fits
-- Don't impose functional patterns just because they're trendy
-- Clear structure matters more than paradigm purity
+### Code Editing
 
-### Naming Conventions
+**Do not edit files directly unless explicitly asked.** Instead:
 
-**Projects**: Evocative single words + functional descriptors
-- Examples: Rhea (curriculum generator), Iris (file creator), Theia (assessment tool)
+1. Show the proposed code
+2. Wait for me to make the edit
 
-**Variables/Functions**: Clear, semantic names over brevity
+This applies to all file modifications. When I say "do it" or "make the change", then edit directly.
+
+### Plans
+
+When asked to plan work:
+
+- Extremely concise; sacrifice grammar for brevity
+- No preamble or context I already know
+- End with unresolved questions (if any)
+
+### Asking vs Proceeding
+
+- **Ambiguous requirements:** Ask first
+- **Clear intent, unclear implementation:** Make a reasonable call, flag assumptions
+- **Refactoring adjacent code:** Stay surgical unless asked to clean up
+- **Multiple valid approaches:** Present options briefly, recommend one
+
+### Verification
+
+Never commit code that hasn't been verified:
+
+- New features: test manually or run automated tests
+- Bug fixes: verify the fix resolves the issue
+- Refactors: ensure behaviour unchanged
+
+---
+
+## Code Conventions
+
+### Paradigm
+
+Pragmatic over ideological. OOP when it fits, functional when it fits. Clear structure matters more than paradigm purity.
+
+### Naming
+
 ```typescript
-// ✅ Yes
+// ✅ Clear, semantic names
 const authenticatedUserId = await getAuthenticatedUser();
 const monthlyRevenue = calculateMonthlyRevenue(transactions);
 
-// ❌ No
+// ❌ Cryptic abbreviations
 const authUsrId = await getAuth();
 const revM = calcMR(txs);
 ```
 
-**Files**: kebab-case for files, PascalCase for React components
-- `user-authentication.ts`, `UserProfile.tsx`
+- Files: `kebab-case.ts`, React components: `PascalCase.tsx`
+- Variables/functions: descriptive over brief
 
 ### TypeScript Standards
-- Strict mode enabled (`"strict": true`)
-- Prefer interfaces over types for object shapes
-- Avoid `any` - use `unknown` when type is truly uncertain
-- Leverage union types and discriminated unions
-- Return types explicitly stated on exported functions
 
-### Testing Reality
-Look, testing is a known weakness. I write tests when they're valuable, but there's no systematic TDD approach or comprehensive coverage culture here. Claude shouldn't assume tests exist for everything, and shouldn't be precious about test-first workflows.
+- Strict mode enabled
+- Interfaces over types for object shapes
+- Avoid `any` — use `unknown` when type is uncertain
+- Explicit return types on exported functions
+- Leverage discriminated unions
 
-When tests do exist:
-- Test file naming: `module-name.test.ts` alongside source
+### Testing
+
+Testing is a known weakness. No systematic TDD, no comprehensive coverage culture.
+
+When tests exist:
+
+- **File naming:** `module-name.test.ts` alongside source
+- **Fixtures pattern:** Test data in `tests/fixtures/<module>.ts` as named exports
+- **Import style:** `import * as fixtures from '../fixtures/<module>'`
 - Integration tests for critical paths preferred over exhaustive unit coverage
-- E2E for user-facing flows when it matters
 
 ---
 
-## Documentation Style
+## Git Workflow
 
-### Structure
-- **Mermaid diagrams** for system architecture and data flow (use them liberally)
-- **Markdown** for all long-form documentation
-- **Inline comments** sparingly - code should largely explain itself
-- **ADRs (Architecture Decision Records)** for significant technical choices
+### Commit Style
 
-### Format Preferences
-- Headers: `##` for main sections, `###` for subsections
-- Code blocks: Always specify language for syntax highlighting
-- Lists: Only when genuinely needed (not for every response)
-- Accessibility: Meaningful alt text, semantic HTML in React
+Conventional Commits: `type(scope): description`
 
-### README Requirements
-Every project should include:
-- One-line description at top
-- Quick start (installation + first run)
-- Architecture overview (with Mermaid if non-trivial)
-- Development workflow
-- Testing approach (or honest admission that it's lacking)
-- License
+**Types:** `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
 
----
+Detailed commit bodies when context needed. Good git history is documentation.
 
-## Project Patterns & Workflows
+### Commit Granularity
 
-### Git Commit Style
-Conventional Commits format: `type(scope): description`
-
-**Types**: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
-
-Detailed commit bodies when context is needed - good git history is documentation. Reference issue/ticket numbers where relevant.
+- Commit frequently with clear, granular changes
+- Each commit should be a single logical unit
+- More atomic commits = better history
 
 ### Breaking Change Detection
 
-**Always flag potential breaking changes** - even when the user is handling commits themselves. Proactively warn when changes might need a `BREAKING CHANGE:` footer or `!` indicator.
+**Always flag potential breaking changes**, even when I'm handling commits. Warn when changes might need `BREAKING CHANGE:` footer or `!` indicator:
 
-Flag when you see:
-- Removed or renamed exports (functions, types, components)
-- Changed function signatures (parameters added/removed/reordered)
+- Removed/renamed exports (functions, types, components)
+- Changed function signatures
 - Modified return types or response shapes
-- Database schema changes (columns, constraints, relations)
-- API endpoint changes (routes, methods, request/response format)
-- Environment variable additions or changes
+- Database schema changes
+- API endpoint changes
+- Environment variable additions/changes
 - Configuration format changes
-- Removed features or deprecated code deletion
 
-Format: `This looks like a breaking change - consider adding BREAKING CHANGE: to the commit footer or using feat!: prefix.`
+Format: `⚠️ Breaking change — consider feat!: or BREAKING CHANGE: footer`
 
-### Development Environment
-- **IDE**: Zed (Catppuccin Latte light / Macchiato dark)
-- **Font**: Fira Code 16px
-- **Hardware**: MacBook Air M2 (2022)
-- **Package Manager**: npm/pnpm (project-specific)
-- **Formatter**: Prettier (external) for JS/TS
-- **Linting**: ESLint with TypeScript rules
+### Branch Naming
 
-### Tooling Preferences
-- Vite for build tooling (over webpack)
-- Vitest for testing in new projects (over Jest)
-- SvelteKit preferred, Next.js only when genuinely needed
-- Avoid Next.js app router complexity unless there's a compelling reason
+`<prefix>/<short-description>` — all lowercase, hyphens between words, imperative mood
+
+**Prefixes:** `feat/`, `fix/`, `enhance/`, `refactor/`, `test/`, `docs/`, `config/`
+
+Branches represent minimal tangible improvements. When in doubt, go smaller.
 
 ---
 
-## Security & Best Practices
+## Security Defaults
 
-### Security Defaults
 - Never commit secrets (environment variables only)
-- Row-Level Security (RLS) for multi-tenant data - this is an area of expertise
-- Input validation at boundaries (Zod, class-validator)
+- Row-Level Security for multi-tenant data
+- Input validation at boundaries (Zod, etc.)
 - HTTPS only, secure cookies
-- CSP headers on sensitive applications
-
-### Database Practices
-- Migrations versioned and tested
-- Connection pooling configured
-- Indexes on frequently queried columns
-- Avoid N+1 queries (seriously)
-- Use transactions for multi-step operations
+- Transactions for multi-step operations
+- Avoid N+1 queries
 
 ---
 
-## Project-Specific Overrides
+## Documentation
 
-This global config is just the baseline. Project-level CLAUDE.md files take precedence:
-
-- Place project conventions in `./.claude/CLAUDE.md`
-- Use nested CLAUDEs for subsystem context (e.g., `frontend/CLAUDE.md`)
-- Project configs override global settings - hierarchy matters
+- **Mermaid diagrams** for architecture and data flow
+- **Inline comments** sparingly — code should explain itself
+- **ADRs** for significant technical choices
+- Headers: `##` main, `###` subsections
+- Code blocks: always specify language
 
 ---
 
-## Meta Notes
+## Project Overrides
 
-- This file is intentionally detailed - comprehensive context reduces repetitive explanations
-- Not every section applies to every interaction - use judgment
-- When in doubt, ask rather than assume
-- Review and update as patterns evolve (this is a living document)
+Project-level configs take precedence:
+
+- `.claude/CLAUDE.md` or `CLAUDE.md` in project root
+- Nested configs for subsystems (e.g., `frontend/CLAUDE.md`)
+- Project settings override everything here
